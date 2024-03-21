@@ -1,7 +1,22 @@
 import React, { useState } from "react";
 import { Text, TextInput, SafeAreaView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import AssetExample from './components/AssetExample';
+import { useFonts } from 'expo-font';
 export default function App() {
+  const [inputUsuario, setInputUsuario] = useState("");
+  const [inputSenha, setInputSenha] = useState("");
+
+  const handleChangeInputUsuario = (text) => {
+    setInputUsuario(text);
+  };
+
+  const handleChangeInputSenha = (text) => {
+    setInputSenha(text);
+  };
+
+  
+
+  const isDisabled = !inputUsuario || !inputSenha;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -18,8 +33,8 @@ export default function App() {
       <SafeAreaView style={styles.containerInput}>
         <Text style={styles.label}>Matrícula:</Text>
         <TextInput 
-          
-          onChangeText={handleChangeInput}
+          value={inputUsuario}
+          onChangeText={handleChangeInputUsuario}
           placeholder="Digite Sua Matrícula" 
           style={styles.input}
         />
@@ -30,7 +45,7 @@ export default function App() {
         <Text style={styles.label}>Senha:</Text>
         <TextInput  
           value={inputSenha}
-          onChangeText={handleChangeInput}
+          onChangeText={handleChangeInputSenha}
           secureTextEntry={true} 
           placeholder="Digite Sua Senha" 
           style={styles.input} 
@@ -41,6 +56,7 @@ export default function App() {
 
         <TouchableOpacity 
           style={[styles.btn, { backgroundColor: isDisabled ? 'gray' : 'green' }]}
+         
           disabled={isDisabled}
         >
           <Text style={styles.textBtn}>Entrar</Text>
@@ -66,6 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 12,
     fontSize: 12,
+    width:"40vh"
   },
   label: {
     fontSize: 18,
@@ -73,7 +90,7 @@ const styles = StyleSheet.create({
   },
   labelLink: {
     color: "#089BCC",
-    textAlign: "right",
+    textAlign: "end",
   },
   btn: {
     marginTop: 12,
@@ -85,7 +102,6 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 18,
     textAlign: "center",
-    fontWeight: "bold",
   },
   loginMail: {
     flexDirection: "row",
@@ -93,7 +109,6 @@ const styles = StyleSheet.create({
     padding: 12,
     margin: 5,
     backgroundColor: "#089BCC",
-    fontWeight: "bold",
     color: "white",
     alignItems: 'center',
   },
@@ -107,7 +122,6 @@ const styles = StyleSheet.create({
     wordWrap: "break-word",
   },
   ouLogin: {
-    fontWeight: "bold",
     color: "gray",
   },
 });
